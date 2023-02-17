@@ -36,7 +36,7 @@ def request_data_and_store(device):
         print(f'Request to device {device.name} with ip address {device.ip} returns invalid JSON response.')
         return
 
-    mystrom_result = MystromResult(device_id=device.id, power=response["power"], ws=response["Ws"], relay=response["relay"], temperature=response["temperature"])
+    mystrom_result = MystromResult(device_id=device.id, power=response["power"], ws=response["Ws"], relay=1 if response["relay"] else 0, temperature=response["temperature"])
 
     session.add(mystrom_result, device)
     session.commit()
